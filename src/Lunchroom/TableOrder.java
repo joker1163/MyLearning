@@ -42,7 +42,7 @@ public class TableOrder implements Order{
     {
         for (int i=0; i<size; i++)
         {
-            if (this.items[i].getName()==itemName)
+            if (this.items[i].getName().equals(itemName))
             {
                 if (i!=size)
                 {
@@ -141,7 +141,7 @@ public class TableOrder implements Order{
     {
         int n=0;
         for (int i=0; i<size; i++) {
-            if (this.items[i].getName() == itemName) {
+            if (this.items[i].getName().equals(itemName)) {
                 n++;
             }
         }
@@ -153,7 +153,7 @@ public class TableOrder implements Order{
     {
         int n=0;
         for (int i=0; i<size; i++) {
-            if (this.items[i].getName() == item.getName()) {
+            if (this.items[i].equals(item)) {
                 n++;
             }
         }

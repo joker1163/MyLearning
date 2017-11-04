@@ -54,14 +54,14 @@ public class InternetOrder implements Order {
         }
         if (head==tail)
         {
-            if (head.value.getName() == itemName)
+            if (head.value.getName().equals(itemName))
             {
                 head=tail=null;
                 size=0;
                 return true;
             }
         }
-        if (head.value.getName() == itemName)
+        if (head.value.getName().equals(itemName))
         {
             head=head.next;
             size--;
@@ -72,7 +72,7 @@ public class InternetOrder implements Order {
             while (t.next!=null)
             {
 
-                if(t.next.value.getName()==itemName)
+                if(t.next.value.getName().equals(itemName))
                 {
                     if (tail==t.next)
                     {
@@ -135,7 +135,7 @@ public class InternetOrder implements Order {
         }
         if (head==tail)
         {
-            if (head.value.getName() == itemName)
+            if (head.value.getName().equals(itemName))
             {
                 head=tail=null;
                 size=0;
@@ -143,7 +143,7 @@ public class InternetOrder implements Order {
                 return ++n;
             }
         }
-        if (head.value.getName() == itemName)
+        if (head.value.getName().equals(itemName))
         {
             head=head.next;
             size--;
@@ -154,7 +154,7 @@ public class InternetOrder implements Order {
             while (t.next!=null)
             {
 
-                if(t.next.value.getName()==itemName)
+                if(t.next.value.getName().equals(itemName))
                 {
                     if (tail==t.next)
                     {
@@ -218,9 +218,36 @@ public class InternetOrder implements Order {
     }
     public int itemQuantity(String itemName)
     {
-        
+        int n=0;
+        ListNode t = head;
+        while (t.next!=null)
+        {
+
+            if(t.next.value.getName().equals(itemName))
+            {
+               n++;
+            }
+            else                 t=t.next;
+        }
+
+        return n;
     }
-    public int itemQuantity(MenuItem item);
+    public int itemQuantity(MenuItem item)
+    {
+        int n=0;
+        ListNode t = head;
+        while (t.next!=null)
+        {
+
+            if(t.next.value.equals(item))
+            {
+                n++;
+            }
+            else                 t=t.next;
+        }
+
+        return n;
+    }
     public MenuItem[] getItems();
     public double costTotal();
     public String[] itemsNames();
