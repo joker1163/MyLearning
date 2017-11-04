@@ -12,7 +12,6 @@ public class TableOrder implements Order{
     }
     TableOrder(Customer customer, int n){
         items = new MenuItem[n];
-        size = items.length;
         this.customer=customer;
     }
 
@@ -47,11 +46,12 @@ public class TableOrder implements Order{
             {
                 if (i!=size)
                 {
-                    for (int j=i+1; j<size;j++, i++)
+                    int j;
+                    for (j=i+1; j<size;j++, i++)
                     {
                         this.items[i]= this.items[j];
                     }
-
+                    this.items[j]=null;
                 }
                 size--;
                 return true;
@@ -68,10 +68,12 @@ public class TableOrder implements Order{
             {
                 if (i!=size)
                 {
-                    for (int j=i+1; j<size;j++, i++)
+                    int j;
+                    for (j=i+1; j<size;j++, i++)
                     {
                         this.items[i]= this.items[j];
                     }
+                    this.items[j]=null;
 
                 }
                 size--;
@@ -81,24 +83,7 @@ public class TableOrder implements Order{
         return false;
     }
 
-    public MenuItem[] remove(MenuItem item, MenuItem[] items)
-    { for (int i=0; i<size; i++)
-        {
-        if (items[i].equals(item))
-        {
-            if (i!=size)
-            {
-                for (int j=i+1; j<size;j++, i++)
-                {
-                    items[i]= items[j];
-                }
 
-            }
-            size--;
-           }
-        }
-        return items;
-    }
 
     public int removeAll(String itemName)
     {
@@ -275,7 +260,24 @@ public class TableOrder implements Order{
         return true;
     }
 
+    public MenuItem[] remove(MenuItem item, MenuItem[] items)
+    { for (int i=0; i<size; i++)
+    {
+        if (items[i].equals(item))
+        {
+            if (i!=size)
+            {
+                for (int j=i+1; j<size;j++, i++)
+                {
+                    items[i]= items[j];
+                }
 
+            }
+            size--;
+        }
+    }
+        return items;
+    }
 
 
 }
