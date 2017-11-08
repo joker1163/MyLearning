@@ -34,8 +34,8 @@ abstract class MenuItem {
 
     public String toString()
     {
-        return ((!getName().isEmpty()) ? "<" + getName() + "> ": ",")
-                +  ((getCost()>0)? "<" + getCost() + "> ": " , ") + " р.";
+        return ((!name.isEmpty()) ? "<" + name + "> ": ",")
+                +  ((cost>0)? "<" + cost + "> ": " , ") + " р.";
     }
 
     @Override
@@ -43,16 +43,16 @@ abstract class MenuItem {
     {
 
         MenuItem tmp = (MenuItem) obj;
-        if (!getName().equals(tmp.getName())) return false;
-        if (getCost()!= tmp.getCost())return false;
+        if (!name.equals(tmp.getName())) return false;
+        if (cost!= tmp.getCost())return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        return getName().hashCode() ^
-                ((Double) getCost()).hashCode() ^
-                getDescription().hashCode();
+        return name.hashCode() ^
+                ((Double) cost).hashCode() ^
+                description.hashCode();
     }
 
 

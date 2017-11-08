@@ -243,8 +243,8 @@ public class TableOrder implements Order{
     {
         if (!(obj instanceof TableOrder))return false;
         TableOrder t = (TableOrder)obj;
-        if (!getCustomer().equals(t.getCustomer()))return false;
-        if (itemsQuantity() != t.itemsQuantity())return false;
+        if (!customer.equals(t.getCustomer()))return false;
+        if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
            //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
         MenuItem[] obj2 = t.getItems().clone(); // делаем клон объекта
@@ -279,6 +279,22 @@ public class TableOrder implements Order{
         return items;
     }
 
+    @Override
+    public int hashCode()
+    {
+
+        MenuItem[] mi = getItems();
+        if (mi.length > 0) {
+            int hash = mi[0].hashCode();
+            for (int i = 1; i < mi.length ; i++) {
+                hash ^= mi[i].hashCode();
+            }
+        return hash^
+                customer.hashCode()^
+                ((Integer)size).hashCode();
+        }
+        return 0;
+    }
 
 }
 

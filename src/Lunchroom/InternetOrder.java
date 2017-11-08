@@ -248,10 +248,55 @@ public class InternetOrder implements Order {
 
         return n;
     }
-    public MenuItem[] getItems();
-    public double costTotal();
-    public String[] itemsNames();
-    public MenuItem[] sortedDishesByCostDesc();
+    public MenuItem[] getItems()
+    {
+        MenuItem[] tempItems = new MenuItem[size];
+        int i=0;
+        if (size != 0) {
+            ListNode tempNode = head;
+            while (tempNode.next!=null)
+            {
+                tempItems[i]= tempNode.value;
+                i++;
+                tempNode=tempNode.next;
+            }
+        }
+        return tempItems;
+    }
+    public double costTotal(){
+        double cost = 0;
+        ListNode tempNode = head;
+        while (tempNode.next!=null)
+        {
+            cost+= tempNode.value.getCost();
+            tempNode=tempNode.next;
+        }
+        return cost;
+    }
+    public String[] itemsNames()
+    {
+        String[] names= new String[size];
+        int t=0;
+        ListNode tempNode = head;
+        while (tempNode.next!=null)
+        {
+            if (!names.equals(tempNode.value.getName()))
+            {
+                names[t]= tempNode.value.getName();
+                tempNode=tempNode.next;
+                t++;
+            }
+        }
+        String[] temp= new String[t];
+        for (int i=0; i<t;i++)
+        {
+            temp[i]=names[i];
+        }
+        return temp;
+    }
+    public MenuItem[] sortedDishesByCostDesc(){
+
+    }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;

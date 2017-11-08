@@ -68,12 +68,12 @@ public final class Address {
     public String toString()
     {
         return "Address: " +
-                ((!getCityName().isEmpty()) ? "<" + getCityName() + "> ": " ")
-                + ((getZipCode()!=-1) ? "<" + getZipCode() + ">, ": " , ")
-                + (!(getStreetName().isEmpty()) ? "<" + getStreetName() + "> ": " ")
-                + ((getBuildingNumber()!= -1)? "<" + getBuildingNumber() + "> ": " ")
-                + ((getBuildingLetter()!= ' ')? "<" + getBuildingLetter() + "> ": " ")
-                + ((getApartmentNumber()!= -1)? "<" + getApartmentNumber() + "> ": " ");
+                ((!cityName.isEmpty()) ? "<" + cityName + "> ": " ")
+                + ((zipCode!=-1) ? "<" + zipCode + ">, ": " , ")
+                + (!(streetName.isEmpty()) ? "<" + streetName + "> ": " ")
+                + ((buildingNumber!= -1)? "<" + buildingNumber+ "> ": " ")
+                + ((buildingLetter!= ' ')? "<" + buildingLetter + "> ": " ")
+                + ((apartmentNumber!= -1)? "<" + apartmentNumber + "> ": " ");
     }
 
     @Override
@@ -81,23 +81,23 @@ public final class Address {
     {
         if (!(obj instanceof Address))return false;
          Address tmp = (Address) obj;
-        if (!getCityName().equals(tmp.getCityName())) return false;
-        if (getApartmentNumber()!= tmp.getApartmentNumber())return false;
-        if (getZipCode()!= tmp.getZipCode())return false;
-        if (getBuildingNumber()!= tmp.getBuildingNumber())return false;
-        if (!getStreetName().equals(tmp.getStreetName())) return false;
-        if (getBuildingLetter()!= tmp.getBuildingLetter())return false;
+        if (!cityName.equals(tmp.getCityName())) return false;
+        if (apartmentNumber!= tmp.getApartmentNumber())return false;
+        if (zipCode!= tmp.getZipCode())return false;
+        if (buildingNumber!= tmp.getBuildingNumber())return false;
+        if (!streetName.equals(tmp.getStreetName())) return false;
+        if (buildingLetter!= tmp.getBuildingLetter())return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
-        return getStreetName().hashCode()^
-                ((Integer)getBuildingNumber()).hashCode()^
-                getCityName().hashCode()^
-                ((Integer)getApartmentNumber()).hashCode()^
-                ((Integer)getZipCode()).hashCode()^
-                ((Character)getBuildingLetter()).hashCode();
+        return streetName.hashCode()^
+                ((Integer)buildingNumber).hashCode()^
+                cityName.hashCode()^
+                ((Integer)apartmentNumber).hashCode()^
+                ((Integer)zipCode).hashCode()^
+                ((Character)buildingLetter).hashCode();
     }
 }

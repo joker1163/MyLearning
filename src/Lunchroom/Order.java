@@ -15,4 +15,7 @@ interface Order {
     public MenuItem[] sortedDishesByCostDesc();
     public void setCustomer(Customer customer);
     public Customer getCustomer();
+    public String toString();
+    public boolean equals(Object obj);
+    public int hashCode();
 }
