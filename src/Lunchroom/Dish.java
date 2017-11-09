@@ -1,9 +1,9 @@
 package Lunchroom;
 
-public class Dish extends MenuItem {
-    private double cost;
-    private String name;
-    private String description;
+public final class Dish extends MenuItem {
+ //   private double cost;
+   // private String name;
+  //  private String description;
 
     Dish(String name, String description)
     {

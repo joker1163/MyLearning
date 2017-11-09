@@ -57,10 +57,10 @@ public class Customer {
     public String toString()
     {
         return "Customer: " +
-                ((!getSecondName().isEmpty()) ? "<" + getSecondName() + "> ": " ")
-                +  ((!getFirstName().isEmpty()) ? "<" + getFirstName() + ">, ": " , ")
-                +  ((getAge()!= -1)? "<" + getAge() + "> ": " , ")
-                + ((Address)getAddress()).toString();
+                ((!secondName.isEmpty()) ? "<" + secondName + "> ": " ")
+                +  ((!firstName.isEmpty()) ? "<" + firstName + ">, ": " , ")
+                +  ((age!= -1)? "<" + age + "> ": " , ")
+                + address.toString();
     }
 
     @Override
@@ -68,19 +68,19 @@ public class Customer {
     {
         if (!(obj instanceof Customer))return false;
         Customer tmp = (Customer) obj;
-        if (!getFirstName().equals(tmp.getFirstName())) return false;
-        if (!getSecondName().equals(getSecondName()))return false;
-        if (getAge()!= tmp.getAge())return false;
-        if (((Address)getAddress()).equals(((Address)tmp.getAddress())))return false;
+        if (!firstName.equals(tmp.getFirstName())) return false;
+        if (!secondName.equals(getSecondName()))return false;
+        if (age!= tmp.getAge())return false;
+        if (address.equals(((Address)tmp.getAddress())))return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
-        return getFirstName().hashCode()^
-                ((Integer)getAge()).hashCode()^
-                getSecondName().hashCode()^
-                getAddress().hashCode();
+        return firstName.hashCode()^
+                ((Integer)age).hashCode()^
+                secondName.hashCode()^
+                address.hashCode();
     }
 }

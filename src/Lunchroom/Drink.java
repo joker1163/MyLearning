@@ -1,8 +1,8 @@
 package Lunchroom;
 
-public class Drink extends MenuItem implements Alcoholable {
-    private double alcoholVol;
-    private DrinkTypeEnum type;
+public final class Drink extends MenuItem implements Alcoholable {
+    private final double alcoholVol;
+    private final DrinkTypeEnum type;
 
     Drink(String name, DrinkTypeEnum type)
     {
@@ -37,7 +37,7 @@ public class Drink extends MenuItem implements Alcoholable {
     public String toString()
     {
         return "Drink: "
-                + getType()
+                + type
                 + ((!getName().isEmpty()) ? "<" + getName() + "> ": " , ")
                 +  ((getCost()>0)? "<" + getCost() + "> ": " , ") + " р. "
                 +  (isAlcoholicDrink()? "Alchohol:  <" + getAlcoholVol() + "> %. ": " ")
