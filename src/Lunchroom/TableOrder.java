@@ -211,15 +211,15 @@ public class TableOrder implements Order{
         {
             for(int j=size-1; j>i; j--)
             {
-                if (this.items[j].getCost()>this.items[j-1].getCost())
+                if (items[j].getCost()>items[j-1].getCost())
                 {
-                    t=this.items[j-1];
-                    this.items[j-1] =this.items[j];
-                    this.items[j]=t;
+                    t=items[j-1];
+                    items[j-1] =items[j];
+                    items[j]=t;
                 }
             }
         }
-        return this.items;
+        return items;
     }
 
     public void setCustomer(Customer customer) {

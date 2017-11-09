@@ -2,7 +2,7 @@ package Lunchroom;
 
 import com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl;
 
-public class Customer {
+public final class Customer {
     private final String firstName;
     private final String secondName;
     private final int age;

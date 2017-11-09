@@ -295,8 +295,46 @@ public class InternetOrder implements Order {
         return temp;
     }
     public MenuItem[] sortedDishesByCostDesc(){
+        ListNode ln;
 
+        MenuItem t;
+
+        for (ListNode i=head; i.next!=null;i=i.next) {
+            if (i.next!=tail)
+            {
+                if (i.value.getCost()<i.next.value.getCost())
+                {
+                    ln = i.next;
+                    i.next=i;
+                    i=ln;
+                    t=items[j-1];
+                    items[j-1] =items[j];
+                    items[j]=t;
+                }
+            }
+        }
+        ListNode tempNode = head;
+        while (tempNode.next!=null)
+        {
+
+        }
+
+
+        for(int i=0; i< size;i++ )
+        {
+            for(int j=size-1; j>i; j--)
+            {
+                if (items[j].getCost()>items[j-1].getCost())
+                {
+                    t=items[j-1];
+                    items[j-1] =items[j];
+                    items[j]=t;
+                }
+            }
+        }
+        return items;
     }
+
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
