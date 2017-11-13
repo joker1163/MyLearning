@@ -18,4 +18,23 @@ interface Order {
     public String toString();
     public boolean equals(Object obj);
     public int hashCode();
+
+    default   public MenuItem[] remove(MenuItem item, MenuItem[] items, int size)
+    { for (int i=0; i<size; i++)
+    {
+        if (items[i].equals(item))
+        {
+            if (i!=size)
+            {
+                for (int j=i+1; j<size;j++, i++)
+                {
+                    items[i]= items[j];
+                }
+
+            }
+            size--;
+        }
+    }
+        return items;
+    }
 }

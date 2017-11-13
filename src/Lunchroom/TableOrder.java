@@ -15,9 +15,9 @@ public class TableOrder implements Order{
         this.customer=customer;
     }
 
-    TableOrder(Customer customer, MenuItem[] item){
-        this.items=item;
-        size = item.length;
+    TableOrder(Customer customer, MenuItem[] items){
+        this.items=items;
+        size = items.length;
         this.customer=customer;
     }
 
@@ -164,14 +164,14 @@ public class TableOrder implements Order{
 
     public MenuItem[] getItems()
     {
-        MenuItem[] t = new MenuItem[size];
+        MenuItem[] tempItems = new MenuItem[size];
         if (size != 0) {
             for (int i = 0; i< size; i++)
             {
-                t[i]=this.items[i];
+                tempItems[i]=this.items[i];
             }
         }
-        return t;
+        return tempItems;
     }
 
     public double costTotal()
@@ -247,11 +247,12 @@ public class TableOrder implements Order{
         if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
            //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
-        MenuItem[] obj2 = t.getItems().clone(); // делаем клон объекта
+        MenuItem[] item = getItems();
+        MenuItem[] itemsObj = t.getItems().clone(); // делаем клон объекта
         for (int i=0;i<itemsQuantity(); i++) {
-            for (int j = 0; i < obj2.length;  j++) {
-                if (getItems()[i].equals(obj2[j])) {
-                    obj2=remove(obj2[j],obj2);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
+            for (int j = 0; i < itemsObj.length;  j++) {
+                if (item[i].equals(itemsObj[j])) {
+                    itemsObj=remove(itemsObj[j],itemsObj,t.size);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
                     break;
                 }
             }
@@ -260,28 +261,11 @@ public class TableOrder implements Order{
         return true;
     }
 
-    public MenuItem[] remove(MenuItem item, MenuItem[] items)
-    { for (int i=0; i<size; i++)
-    {
-        if (items[i].equals(item))
-        {
-            if (i!=size)
-            {
-                for (int j=i+1; j<size;j++, i++)
-                {
-                    items[i]= items[j];
-                }
 
-            }
-            size--;
-        }
-    }
-        return items;
-    }
 
     @Override
-    public int hashCode()
-    {
+        public int hashCode()
+        {
 
         MenuItem[] mi = getItems();
         if (mi.length > 0) {

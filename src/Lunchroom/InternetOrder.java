@@ -4,7 +4,8 @@ public class InternetOrder implements Order {
     private int size=0;
     private ListNode head=null;
     private ListNode tail=null;
-    private MenuItem[] items;
+    ///    private MenuItem[] items;   - если мы не парсим массив в список
+    private MenuItem item;
     private Customer customer;
 
     private class ListNode {
@@ -25,11 +26,28 @@ public class InternetOrder implements Order {
 
     InternetOrder(MenuItem[] items, Customer customer)
     {
-        this.items=items;
+        for (MenuItem i: items)
+            addBack(i);
         this.customer=customer;
-        this.size=items.length;
+        //this.size=items.length;
     }
 
+
+    public void addBack(MenuItem value)
+    {
+        if(head==null)
+        {
+            head = new ListNode(value, null);
+            tail=head;
+        }
+        else
+        {
+            tail.next = new ListNode(value, null);
+            tail=tail.next;
+
+        }
+        ++size;
+    }
 
     public boolean add(MenuItem item)
     {
@@ -342,6 +360,61 @@ public class InternetOrder implements Order {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    @Override
+    public String toString()
+    {
+        String itemStr = "\n";
+        ListNode tempNode = head;
+        while (tempNode.next!=null)
+        {
+            itemStr+=tempNode.value.toString()+ "\n";
+            tempNode=tempNode.next;
+        }
+        return "Internet order: " +"\n" + customer.toString()+ "\n" + size + itemStr;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof InternetOrder))return false;
+        InternetOrder t = (InternetOrder)obj;
+        if (!customer.equals(t.getCustomer()))return false;
+        if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
+        //  MenuItem[] obj1 = getItems();
+        //MenuItem[] obj2 = t.getItems();
+        MenuItem[] itemsObj = t.getItems().clone(); // делаем клон объекта
+        for (int i=0;i<itemsQuantity(); i++) {
+            for (int j = 0; i < itemsObj.length;  j++) {
+                if (getItems()[i].equals(itemsObj[j])) {
+                    itemsObj=remove(itemsObj[j],itemsObj,t.size);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
+                    break;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+
+    @Override
+    public int hashCode()
+    {
+        MenuItem[] mi = getItems();
+        if (mi.length > 0) {
+            int hash = mi[0].hashCode();
+            for (int i = 1; i < mi.length ; i++) {
+                hash ^= mi[i].hashCode();
+            }
+            return hash^
+                    customer.hashCode()^
+                    ((Integer)size).hashCode();
+        }
+        return 0;
     }
 
 }
