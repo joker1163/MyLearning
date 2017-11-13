@@ -66,7 +66,10 @@ public final class Customer {
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Customer))return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Customer))return false;
         Customer tmp = (Customer) obj;
         if (!firstName.equals(tmp.getFirstName())) return false;
         if (!secondName.equals(getSecondName()))return false;

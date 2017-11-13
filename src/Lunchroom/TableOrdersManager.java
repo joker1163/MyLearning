@@ -1,6 +1,6 @@
 package Lunchroom;
 
-public class TableOrdersManager {
+public class TableOrdersManager implements OrdersManager{
     private Order[] orders;
 
     TableOrdersManager(int n){
@@ -103,7 +103,7 @@ public class TableOrdersManager {
         return sum;
     }
 
-    public int itemQuanity(String itemName)
+    public int itemsQuantity(String itemName)
     {
         int quanity=0;
         int[] busyTables = busyTableNumbers();

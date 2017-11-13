@@ -241,7 +241,10 @@ public class TableOrder implements Order{
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof TableOrder))return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof TableOrder))return false;
         TableOrder t = (TableOrder)obj;
         if (!customer.equals(t.getCustomer()))return false;
         if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE

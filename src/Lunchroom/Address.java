@@ -79,7 +79,10 @@ public final class Address {
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Address))return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Address))return false;
          Address tmp = (Address) obj;
         if (!cityName.equals(tmp.getCityName())) return false;
         if (apartmentNumber!= tmp.getApartmentNumber())return false;

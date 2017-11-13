@@ -49,7 +49,10 @@ public final class Dish extends MenuItem {
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Dish))return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Dish))return false;
         Dish tmp = (Dish) obj;
         if (!getName().equals(tmp.getName())) return false;
         if (getCost()!= tmp.getCost())return false;

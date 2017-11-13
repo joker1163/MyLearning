@@ -313,7 +313,8 @@ public class InternetOrder implements Order {
         return temp;
     }
     public MenuItem[] sortedDishesByCostDesc(){
-        ListNode ln;
+        return new MenuItem[10];
+       /* ListNode ln;
 
         MenuItem t;
 
@@ -337,7 +338,7 @@ public class InternetOrder implements Order {
 
         }
 
-
+/*
         for(int i=0; i< size;i++ )
         {
             for(int j=size-1; j>i; j--)
@@ -350,7 +351,7 @@ public class InternetOrder implements Order {
                 }
             }
         }
-        return items;
+        return items;*/
     }
 
 
@@ -378,16 +379,20 @@ public class InternetOrder implements Order {
     @Override
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof InternetOrder))return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof InternetOrder))return false;
         InternetOrder t = (InternetOrder)obj;
         if (!customer.equals(t.getCustomer()))return false;
         if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
         //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
+        MenuItem[] item = getItems();
         MenuItem[] itemsObj = t.getItems().clone(); // делаем клон объекта
         for (int i=0;i<itemsQuantity(); i++) {
             for (int j = 0; i < itemsObj.length;  j++) {
-                if (getItems()[i].equals(itemsObj[j])) {
+                if (item[i].equals(itemsObj[j])) {
                     itemsObj=remove(itemsObj[j],itemsObj,t.size);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
                     break;
                 }
