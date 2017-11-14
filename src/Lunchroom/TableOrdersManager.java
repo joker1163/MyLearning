@@ -28,14 +28,23 @@ public class TableOrdersManager implements OrdersManager{
         orders[tableNumber]=null;
     }
 
-    public void remove(Order order)
+    public int remove(Order order)
     {
-
+        for (int i=1;i<orders.length; i++)
+        {
+            if (orders[i]==order) { orders[i]=null; return i;}
+        }
+        return -1;
     }
 
-    public void removeAll(Order order)
+    public int removeAll(Order order)
     {
-
+        int delOrder=0;
+        for (int i=1;i<orders.length; i++)
+        {
+            if (orders[i]==order) { orders[i]=null; delOrder++;}
+        }
+        return ((delOrder>0) ?  delOrder :  -1);
     }
 
     public int freeTableNumber()
@@ -87,9 +96,20 @@ public class TableOrdersManager implements OrdersManager{
         }
     }
 
-    public Order[] getOrder()
+    public Order[] getOrders()
     {
         return orders;
+    }
+
+    public int ordersQuantity()
+    {
+        int ordQan=0;
+        for (Order i: orders)
+        {
+            if (i!=null)
+                ordQan+= i.itemsQuantity();
+        }
+        return ordQan;
     }
 
     public double ordersCostSummary()
@@ -112,6 +132,20 @@ public class TableOrdersManager implements OrdersManager{
             if (orders[busyTables[i]].itemQuantity(itemName)> 0)
             {
                 quanity+= orders[busyTables[i]].itemQuantity(itemName);
+            }
+        }
+        return quanity;
+    }
+
+    public int itemsQuantity(MenuItem item)
+    {
+        int quanity=0;
+        int[] busyTables = busyTableNumbers();
+        for (int i=0;i<busyTables.length; i++)
+        {
+            if (orders[busyTables[i]].itemQuantity(item)> 0)
+            {
+                quanity+= orders[busyTables[i]].itemQuantity(item);
             }
         }
         return quanity;
