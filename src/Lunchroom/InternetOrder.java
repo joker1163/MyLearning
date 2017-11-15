@@ -17,6 +17,7 @@ public class InternetOrder implements Order {
             this.value=value;
             this.next=next;
         }
+
     }
 
     InternetOrder ()
