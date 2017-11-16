@@ -41,7 +41,7 @@ public final class Dish extends MenuItem {
     @Override
     public String toString()
     {
-        return ((!getName().isEmpty()) ? "<" + getName() + "> ": ",")
+        return "Dish: " + ((!getName().isEmpty()) ? "<" + getName() + "> ": ",")
                 +  ((getCost()>0)? "<" + getCost() + "> ": " , ") + " р."
                 + ((!getDescription().isEmpty()) ? "<" + getDescription() + "> ": " ");
     }

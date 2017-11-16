@@ -25,7 +25,7 @@ public class InternetOrder implements Order {
         head=null;
     }
 
-    InternetOrder(MenuItem[] items, Customer customer)
+    InternetOrder( Customer customer, MenuItem[] items)
     {
         for (MenuItem i: items)
             addBack(i);

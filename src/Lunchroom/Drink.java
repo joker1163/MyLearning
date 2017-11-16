@@ -37,11 +37,11 @@ public final class Drink extends MenuItem implements Alcoholable {
     public String toString()
     {
         return "Drink: "
-                + type
+                + "<" + type + ">"
                 + ((!getName().isEmpty()) ? "<" + getName() + "> ": " , ")
                 +  ((getCost()>0)? "<" + getCost() + "> ": " , ") + " р. "
                 +  (isAlcoholicDrink()? "Alchohol:  <" + getAlcoholVol() + "> %. ": " ")
-                +  ((!getDescription().isEmpty()) ? "<" + getDescription() + ">. ": ".");
+                +  ((!getDescription().isEmpty()) ? " <" + getDescription() + ">. ": ".");
     }
 
     @Override

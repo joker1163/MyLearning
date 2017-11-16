@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class TableOrder implements Order{
     private MenuItem[] items;
-    private int size=0;
+    private int size=0; // количество блюд в заказе
     private Customer customer;
 
     TableOrder(){
@@ -24,16 +24,20 @@ public class TableOrder implements Order{
     //// Добавление заказа в массив заказов
     public boolean add(MenuItem item)
     {
-        if ( size >= this.items.length) {
-            MenuItem[] t = new MenuItem[this.items.length*2];
+
+        if ( size >= items.length) {
+            MenuItem[] t = new MenuItem[size*2];
             for (int i=0; i < size; i++)
             {
-                t[i]= this.items[i];
+                t[i]= items[i];
             }
-            this.items=t;
+          items=t;
+           // size++;
         }
-            this.items[size] = item;
-            size++;
+
+       items[size] = item;
+        size++;
+
             return true;
     }
 
@@ -233,14 +237,26 @@ public class TableOrder implements Order{
     @Override
     public String toString()
    {
-        String itemStr = "\n";
-        for (MenuItem i: items)
-            itemStr+= i.toString()+"\n";
-        return "TableOrder: " + size + itemStr;
+       String itemStr = "\n";
+       try
+       {
+
+           for (MenuItem i: items)
+               if (i != null)
+               {
+               itemStr+= i.toString()+"\n";}
+
+       }
+
+        catch(NullPointerException npe) {
+       System.out.println(npe.getMessage());}
+       return "TableOrder: " + size + itemStr;
+
     }
     @Override
     public boolean equals(Object obj)
     {
+        boolean state=false;
         if (obj == this) {
             return true;
         }
@@ -251,17 +267,21 @@ public class TableOrder implements Order{
            //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
         MenuItem[] item = getItems();
-        MenuItem[] itemsObj = t.getItems().clone(); // делаем клон объекта
-        for (int i=0;i<itemsQuantity(); i++) {
-            for (int j = 0; i < itemsObj.length;  j++) {
-                if (item[i].equals(itemsObj[j])) {
-                    itemsObj=remove(itemsObj[j],itemsObj,t.size);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
+        MenuItem[] itemsObj = t.getItems(); // делаем клон объекта
+        for (int i=0;i<item.length; i++) {
+            for (int j = 0; j < itemsObj.length;  j++) {
+                if (itemsObj[j]!=null && item[i].equals(itemsObj[j])) {
+                    itemsObj[j]=null;
+                   // itemsObj=remove(itemsObj[j],itemsObj,t.size);  // удаляем найденные позиции из второго объекта чтобы они учитывались на следующей итерации
+                    //continue;
+                    state=true;
                     break;
                 }
+                state = false;
             }
-            return false;
+           // return ;
         }
-        return true;
+        return state;
     }
 
 
