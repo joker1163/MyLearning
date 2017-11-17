@@ -3,8 +3,7 @@ package Lunchroom;
 interface Alcoholable {
     default boolean isAlcoholicDrink()
     {
-        if (getAlcoholVol()>0) return true;
-        else return false;
+        return (getAlcoholVol()>0) ? true: false;
     }
     double getAlcoholVol();
 }

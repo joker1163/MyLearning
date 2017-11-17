@@ -238,18 +238,18 @@ public class TableOrder implements Order{
     public String toString()
    {
        String itemStr = "\n";
-       try
-       {
+     //  try
+       //{
 
            for (MenuItem i: items)
                if (i != null)
                {
                itemStr+= i.toString()+"\n";}
 
-       }
+       //}
 
-        catch(NullPointerException npe) {
-       System.out.println(npe.getMessage());}
+       // catch(NullPointerException npe) {
+     //  System.out.println(npe.getMessage());}
        return "TableOrder: " + size + itemStr;
 
     }

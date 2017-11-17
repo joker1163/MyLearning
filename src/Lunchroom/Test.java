@@ -3,20 +3,20 @@ package Lunchroom;
 public class  Test {
     public static void main(String[] args) {
 //
-
+        MenuItem mi;
         //// инициализация напитков
-        MenuItem juice = new Drink(100, "Сок", DrinkTypeEnum.JUICE, "Бакал сока", 0);
-        MenuItem coffe = new Drink(50, "Кофе", DrinkTypeEnum.COFFE, "Кофе черный расторивый", 0);
-        MenuItem greenTea = new Drink(300, "Зеленый чай", DrinkTypeEnum.GREEN_TEA, "Зеленый чай с мелисой", 0);
-        MenuItem beer = new Drink(150, "Пиво", DrinkTypeEnum.BEER, "Бакал чешского пива", 5.5);
-        MenuItem milk = new Drink(88, "Молоко", DrinkTypeEnum.MILK, "Стакан молока", 0);
+        Drink juice = new Drink(100, "Сок", DrinkTypeEnum.JUICE, "Бакал сока", 0);
+        Drink coffe = new Drink(50, "Кофе", DrinkTypeEnum.COFFE, "Кофе черный расторивый", 0);
+        Drink greenTea = new Drink(300, "Зеленый чай", DrinkTypeEnum.GREEN_TEA, "Зеленый чай с мелисой", 0);
+        Drink beer = new Drink(150, "Пиво", DrinkTypeEnum.BEER, "Бакал чешского пива", 5.5);
+        Drink milk = new Drink(88, "Молоко", DrinkTypeEnum.MILK, "Стакан молока", 0);
 
         //// инициализация блюд
-        MenuItem borch = new Dish("Борщ", 88, "Тарелка борща");
-        MenuItem omlette = new Dish("Яишница", 30, "Яйишница из свежих яйиц");
-        MenuItem glutton = new Dish("Обжорка", 45, "Салат обжорка с курицей");
-        MenuItem pasta = new Dish("Макароны по флотски", 70, "Макароны по флотски в соусе");
-        MenuItem potato = new Dish("Картошка по французски", 75, "Картошка по французски с сыром");
+        Dish borch = new Dish("Борщ", 88, "Тарелка борща");
+        Dish omlette = new Dish("Яишница", 30, "Яйишница из свежих яйиц");
+        Dish glutton = new Dish("Обжорка", 45, "Салат обжорка с курицей");
+        Dish pasta = new Dish("Макароны по флотски", 70, "Макароны по флотски в соусе");
+        Dish potato = new Dish("Картошка по французски", 75, "Картошка по французски с сыром");
 
         //// инициализация покупателей
         Customer cust1 = new Customer("Илья", "Слепушов", 25,
@@ -26,14 +26,56 @@ public class  Test {
                 new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
 
         //// иниз заказов
-        Order oneOrder = new TableOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta});
-        Order twoOrder = new TableOrder(cust1, new MenuItem[] {juice, borch,pasta,omlette});
-        String[] t = twoOrder.itemsNames();
-      //  for (String i:t)
-        //{
-            System.out.println(twoOrder.equals(oneOrder));
+        Order oneOrder = new TableOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta, juice, borch, beer});
 
-       // }
+        Order oneOrder_ = new InternetOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta, juice, borch,omlette});
+
+        Order twoOrder = new InternetOrder(cust2, new MenuItem[] {juice, borch,pasta,omlette,juice});
+
+        OrdersManager OM;
+        TableOrdersManager tom1 = new TableOrdersManager(5);
+        InternetOrdersManager iom1= new InternetOrdersManager();
+
+        iom1.add(oneOrder_);
+        iom1.add(twoOrder);
+        OM = iom1;
+        iom1.remove();
+        System.out.println(OM.ordersQuantity());
+       /* Alcoholable a;
+        tom1.add(oneOrder,3);
+        tom1.addItem(potato, 3);
+        Order test = tom1.getOrder(3);
+        MenuItem[] test2 = test.getItems();
+        for (MenuItem i:test2) {
+
+            System.out.println(i.toString());
+        }
+
+
+     //   System.out.println(om.getClass());
+        //  System.out.println(tom1.);
+        Order[] or = tom1.getOrders();
+            for (Order i:or) {
+               // if (i!=null) System.out.println( new TableOrder(i.getCustomer(),i.sortedDishesByCostDesc()).toString());
+                 if (i!=null) {;}
+
+                //System.out.println(twoOrder.costTotal());
+        }
+
+    //    System.out.println(om.itemsQuantity(borch));
+      //  Order twoOrder = new InternetOrder();
+       // twoOrder.add(juice);
+       // twoOrder.add(borch);
+       // twoOrder.add(pasta);
+       // twoOrder.add(omlette);
+
+        //System.out.println(twoOrder.);
+    //    String[] t = twoOrder.itemsNames();
+       // for (String i:t) {
+          //  System.out.println(i);
+            //    System.out.println(twoOrder.costTotal());
+      // }
+
       //  System.out.println();
 
 

@@ -9,8 +9,8 @@ public class InternetOrder implements Order {
     private Customer customer;
 
     private class ListNode {
-        MenuItem value;
-        ListNode next;
+       private MenuItem value;
+        private ListNode next;
 
         ListNode(MenuItem value, ListNode next)
         {
@@ -20,9 +20,12 @@ public class InternetOrder implements Order {
 
     }
 
+
+
     InternetOrder ()
     {
-        head=null;
+        //head=new ListNode(null,null);
+       head= null;
     }
 
     InternetOrder( Customer customer, MenuItem[] items)
@@ -88,7 +91,7 @@ public class InternetOrder implements Order {
         }
         else {
             ListNode t = head;
-            while (t.next!=null)
+            while (t!=null)
             {
 
                 if(t.next.value.getName().equals(itemName))
@@ -128,7 +131,7 @@ public class InternetOrder implements Order {
         }
         else {
             ListNode t = head;
-            while (t.next!=null)
+            while (t!=null)
             {
 
                 if(t.next.value == item)
@@ -158,7 +161,6 @@ public class InternetOrder implements Order {
             {
                 head=tail=null;
                 size=0;
-
                 return ++n;
             }
         }
@@ -170,7 +172,7 @@ public class InternetOrder implements Order {
         }
         else {
             ListNode t = head;
-            while (t.next!=null)
+            while (t!=null)
             {
 
                 if(t.next.value.getName().equals(itemName))
@@ -212,7 +214,7 @@ public class InternetOrder implements Order {
         }
         else {
             ListNode t = head;
-            while (t.next!=null)
+            while (t!=null)
             {
 
                 if(t.next.value == item)
@@ -239,12 +241,13 @@ public class InternetOrder implements Order {
     {
         int n=0;
         ListNode t = head;
-        while (t.next!=null)
+        while (t!=null)
         {
 
-            if(t.next.value.getName().equals(itemName))
+            if(t.value.getName().equals(itemName))
             {
                n++;
+                t=t.next;
             }
             else                 t=t.next;
         }
@@ -255,12 +258,13 @@ public class InternetOrder implements Order {
     {
         int n=0;
         ListNode t = head;
-        while (t.next!=null)
+        while (t!=null)
         {
 
-            if(t.next.value.equals(item))
+            if(t.value.equals(item))
             {
                 n++;
+                t=t.next;
             }
             else                 t=t.next;
         }
@@ -273,7 +277,7 @@ public class InternetOrder implements Order {
         int i=0;
         if (size != 0) {
             ListNode tempNode = head;
-            while (tempNode.next!=null)
+            while (tempNode!=null)
             {
                 tempItems[i]= tempNode.value;
                 i++;
@@ -285,7 +289,7 @@ public class InternetOrder implements Order {
     public double costTotal(){
         double cost = 0;
         ListNode tempNode = head;
-        while (tempNode.next!=null)
+        while (tempNode!=null)
         {
             cost+= tempNode.value.getCost();
             tempNode=tempNode.next;
@@ -297,14 +301,15 @@ public class InternetOrder implements Order {
         String[] names= new String[size];
         int t=0;
         ListNode tempNode = head;
-        while (tempNode.next!=null)
+        while (tempNode!=null)
         {
             if (!names.equals(tempNode.value.getName()))
             {
                 names[t]= tempNode.value.getName();
-                tempNode=tempNode.next;
+
                 t++;
             }
+            tempNode=tempNode.next;
         }
         String[] temp= new String[t];
         for (int i=0; i<t;i++)
@@ -369,7 +374,7 @@ public class InternetOrder implements Order {
     {
         String itemStr = "\n";
         ListNode tempNode = head;
-        while (tempNode.next!=null)
+        while (tempNode!=null)
         {
             itemStr+=tempNode.value.toString()+ "\n";
             tempNode=tempNode.next;

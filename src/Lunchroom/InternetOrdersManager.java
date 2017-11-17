@@ -2,9 +2,9 @@ package Lunchroom;
 
 public class InternetOrdersManager implements OrdersManager {
 
-    public QueueNode head;
-    public QueueNode tail;
-    public int size=0;
+    private QueueNode head;
+    private QueueNode tail;
+    private int size=0;
     private class QueueNode
     {
         QueueNode next;
@@ -29,6 +29,7 @@ public class InternetOrdersManager implements OrdersManager {
         if(orders!=null)
         {
             for (Order i:orders)
+                if (i!=null)
                 add(i);
         }
     }
@@ -76,11 +77,11 @@ public class InternetOrdersManager implements OrdersManager {
         int count=0;
         if (head==null) return 0;
         QueueNode t = head;
-        while (t.next!= null)        {
+        while (t!= null)        {
 
-            if (t.next.value.itemQuantity(itemName)> 0)
+            if (t.value.itemQuantity(itemName)> 0)
             {
-                count += t.next.value.itemQuantity(itemName);
+                count += t.value.itemQuantity(itemName);
             }
             t=t.next;
         }
@@ -91,11 +92,11 @@ public class InternetOrdersManager implements OrdersManager {
         int count=0;
         if (head==null) return 0;
         QueueNode t = head;
-        while (t.next!= null)        {
+        while (t!= null)        {
 
-            if (t.next.value.itemQuantity(item)> 0)
+            if (t.value.itemQuantity(item)> 0)
             {
-                count += t.next.value.itemQuantity(item);
+                count += t.value.itemQuantity(item);
             }
             t=t.next;
         }
@@ -106,7 +107,7 @@ public class InternetOrdersManager implements OrdersManager {
         Order[] tempOrder = new Order[size];
         int i = 0;
         QueueNode t = head;
-        while (t.next!= null)
+        while (t!= null)
         {
             tempOrder[i] = t.value;
             i++;
@@ -118,7 +119,7 @@ public class InternetOrdersManager implements OrdersManager {
     {
         double sum=0;
         QueueNode t = head;
-        while (t.next!= null)
+        while (t!= null)
         {
             sum+=t.value.costTotal();
             t=t.next;

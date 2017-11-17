@@ -32,7 +32,7 @@ public class TableOrdersManager implements OrdersManager{
     {
         for (int i=1;i<orders.length; i++)
         {
-            if (orders[i]==order) { orders[i]=null; return i;}
+            if (orders[i]!=null&& orders[i].equals(order)) { orders[i]=null; return i;}
         }
         return -1;
     }
