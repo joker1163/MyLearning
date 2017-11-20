@@ -1,24 +1,33 @@
 package Lunchroom;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+
+
 
 public class TableOrder implements Order{
     private MenuItem[] items;
     private int size=0; // количество блюд в заказе
     private Customer customer;
+    private LocalDateTime timeOrder;
 
     TableOrder(){
         items = new MenuItem[16];
+        this.timeOrder = LocalDateTime.now();
     }
     TableOrder(Customer customer, int n){
         items = new MenuItem[n];
         this.customer=customer;
+        this.timeOrder = LocalDateTime.now();
+
     }
 
     TableOrder(Customer customer, MenuItem[] items){
         this.items=items;
         size = items.length;
         this.customer=customer;
+        this.timeOrder = LocalDateTime.now();
+
     }
 
     //// Добавление заказа в массив заказов
@@ -232,6 +241,15 @@ public class TableOrder implements Order{
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public LocalDateTime getTime() {
+        return timeOrder;
+    }
+
+
+    public void setTime(LocalDateTime timeOrder) {
+        this.timeOrder = timeOrder;
     }
 
     @Override

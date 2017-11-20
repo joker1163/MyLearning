@@ -1,5 +1,7 @@
 package Lunchroom;
 
+import java.time.LocalDateTime;
+
 public class InternetOrder implements Order {
     private int size=0;
     private ListNode head=null;
@@ -7,6 +9,7 @@ public class InternetOrder implements Order {
     ///    private MenuItem[] items;   - если мы не парсим массив в список
     private MenuItem item;
     private Customer customer;
+    private LocalDateTime timeOrder;
 
     private class ListNode {
        private MenuItem value;
@@ -26,6 +29,8 @@ public class InternetOrder implements Order {
     {
         //head=new ListNode(null,null);
        head= null;
+        this.timeOrder = LocalDateTime.now();
+
     }
 
     InternetOrder( Customer customer, MenuItem[] items)
@@ -33,6 +38,8 @@ public class InternetOrder implements Order {
         for (MenuItem i: items)
             addBack(i);
         this.customer=customer;
+        this.timeOrder = LocalDateTime.now();
+
         //this.size=items.length;
     }
 
@@ -367,6 +374,15 @@ public class InternetOrder implements Order {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public LocalDateTime getTime() {
+        return timeOrder;
+    }
+
+
+    public void setTime(LocalDateTime timeOrder) {
+        this.timeOrder = timeOrder;
     }
 
     @Override

@@ -1,4 +1,6 @@
 package Lunchroom;
+import java.time.LocalDateTime;
+
 
 interface Order {
     public boolean add(MenuItem item);
@@ -18,6 +20,8 @@ interface Order {
     public String toString();
     public boolean equals(Object obj);
     public int hashCode();
+    public LocalDateTime getTime();
+    public void setTime(LocalDateTime timeOrder);
 
     default   public MenuItem[] remove(MenuItem item, MenuItem[] items, int size)
     { for (int i=0; i<size; i++)

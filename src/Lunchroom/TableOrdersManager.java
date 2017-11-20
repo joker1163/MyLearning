@@ -1,5 +1,7 @@
 package Lunchroom;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 public class TableOrdersManager implements OrdersManager{
     private Order[] orders;
 
@@ -9,8 +11,9 @@ public class TableOrdersManager implements OrdersManager{
 
     public void add(Order order, int tableNumber)
     {
+        if (tableNumber > orders.length|| tableNumber < 0) { System.out.println("Нет такого стола"); return;}
         if (orders[tableNumber]==null)  orders[tableNumber] = order;
-        else System.out.println("Столик " +tableNumber +" занят или не существует");
+        else System.out.println("Столик " +tableNumber +" занят");
     }
 
     public Order getOrder(int tableNumber)
@@ -149,6 +152,32 @@ public class TableOrdersManager implements OrdersManager{
             }
         }
         return quanity;
+    }
+
+    public int getNumberOrdersInDay(LocalDate date)
+    {
+        int number=0;
+        for (Order i: orders)
+            if(i!= null && i.getTime().toLocalDate().equals(date))
+                number++;
+        return number;
+    }
+    public ArrayList getOrdersInDay(LocalDate date)
+    {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        for (Order i: orders)
+            if(i!= null && i.getTime().toLocalDate().equals(date))
+              orders.add(i);
+        return orders;
+
+    }
+    public ArrayList getOrdersCustomer(Customer customer)
+    {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        for (Order i: orders)
+            if(i!= null && i.getCustomer().equals(customer))
+                orders.add(i);
+        return orders;
     }
 
 

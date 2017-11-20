@@ -67,13 +67,13 @@ public final class Address {
     @Override
     public String toString()
     {
-        return "Address: " +
+        return String.format("Address: %-4s ",
                 ((!cityName.isEmpty()) ? "<" + cityName + "> ": " ")
-                + ((zipCode!=-1) ? "<" + zipCode + ">, ": " , ")
-                + (!(streetName.isEmpty()) ? "<" + streetName + "> ": " ")
-                + ((buildingNumber!= -1)? "<" + buildingNumber+ "> ": " ")
-                + ((buildingLetter!= ' ')? "<" + buildingLetter + "> ": " ")
-                + ((apartmentNumber!= -1)? "<" + apartmentNumber + "> ": " ");
+                ,((zipCode!=-1) ? "<" + zipCode + ">, ": " , ")
+                ,(!(streetName.isEmpty()) ? "<" + streetName + "> ": " ")
+                ,((buildingNumber!= -1)? "<" + buildingNumber+ "> ": " ")
+                ,((buildingLetter!= ' ')? "<" + buildingLetter + "> ": " ")
+                ,((apartmentNumber!= -1)? "<" + apartmentNumber + "> ": " "));
     }
 
     @Override

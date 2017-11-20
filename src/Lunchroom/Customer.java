@@ -1,15 +1,15 @@
 package Lunchroom;
 
 import com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl;
-
+import java.time.LocalDate;
 public final class Customer {
     private final String firstName;
     private final String secondName;
-    private final int age;
+    private final LocalDate birthDate;
     private final Address address;
 
-    public static final Customer customer = new Customer(21);
-    public static final Customer customer_ = new Customer(14);
+    public static final Customer customer = new Customer(LocalDate.now().minusYears(21));
+    public static final Customer customer_ = new Customer(LocalDate.now().minusYears(14));
 
 
     Customer()
@@ -17,27 +17,27 @@ public final class Customer {
         address = Address.add;
         firstName = "";
         secondName="";
-        age = -1;
+        birthDate = LocalDate.of(0000,00,00);
     }
 
-    Customer(int age)
+    Customer(LocalDate age)
     {
         address = Address.add;
         firstName = "";
         secondName="";
-        this.age = age;
+        this.birthDate = age;
     }
 
-    Customer(String firstName, String secondName,int age, Address address)
+    Customer(String firstName, String secondName,LocalDate age, Address address)
     {
         this.address = address;
         this.firstName = firstName;
         this.secondName=secondName;
-        this.age =age;
+        this.birthDate =age;
     }
 
     public int getAge() {
-        return age;
+        return this.birthDate.getYear()- LocalDate.now().getYear();
     }
 
     public Address getAddress() {
@@ -59,7 +59,7 @@ public final class Customer {
         return "Customer: " +
                 ((!secondName.isEmpty()) ? "<" + secondName + "> ": " ")
                 +  ((!firstName.isEmpty()) ? "<" + firstName + ">, ": " , ")
-                +  ((age!= -1)? "<" + age + "> ": " , ")
+                +  ((birthDate!= LocalDate.of(0000,00,00))? "<" + birthDate.toString() + "> ": " , ")
                 + address.toString();
     }
 
@@ -73,7 +73,7 @@ public final class Customer {
         Customer tmp = (Customer) obj;
         if (!firstName.equals(tmp.getFirstName())) return false;
         if (!secondName.equals(getSecondName()))return false;
-        if (age!= tmp.getAge())return false;
+        if (getAge()!= tmp.getAge())return false;
         if (address.equals(((Address)tmp.getAddress())))return false;
         return true;
     }
@@ -82,7 +82,7 @@ public final class Customer {
     public int hashCode()
     {
         return firstName.hashCode()^
-                ((Integer)age).hashCode()^
+                ((Integer)getAge()).hashCode()^
                 secondName.hashCode()^
                 address.hashCode();
     }

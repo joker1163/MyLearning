@@ -1,5 +1,7 @@
 package Lunchroom;
 
+import java.time.LocalDate;
+
 public class  Test {
     public static void main(String[] args) {
 //
@@ -19,10 +21,10 @@ public class  Test {
         Dish potato = new Dish("Картошка по французски", 75, "Картошка по французски с сыром");
 
         //// инициализация покупателей
-        Customer cust1 = new Customer("Илья", "Слепушов", 25,
+        Customer cust1 = new Customer("Илья", "Слепушов", LocalDate.of(1992,5,8),
                 new Address("Самара", 443124, "5-я просека", 110, 'д', 199));
 
-        Customer cust2 = new Customer("Екатерина", "Слепушова", 24,
+        Customer cust2 = new Customer("Екатерина", "Слепушова", LocalDate.of(1993,5,11),
                 new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
 
         //// иниз заказов
@@ -35,12 +37,14 @@ public class  Test {
         OrdersManager OM;
         TableOrdersManager tom1 = new TableOrdersManager(5);
         InternetOrdersManager iom1= new InternetOrdersManager();
-
-        iom1.add(oneOrder_);
-        iom1.add(twoOrder);
-        OM = iom1;
-        iom1.remove();
-        System.out.println(OM.ordersQuantity());
+        tom1.add(oneOrder,1);
+       // tom1.add(oneOrder_,1);
+     //   iom1.add(oneOrder_);
+      //  iom1.add(twoOrder);
+        OM = tom1;
+//        OM = iom1;
+//        iom1.remove();
+        System.out.println(OM.getOrders()[1].getTime());
        /* Alcoholable a;
         tom1.add(oneOrder,3);
         tom1.addItem(potato, 3);

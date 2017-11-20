@@ -1,5 +1,8 @@
 package Lunchroom;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class InternetOrdersManager implements OrdersManager {
 
     private QueueNode head;
@@ -130,5 +133,42 @@ public class InternetOrdersManager implements OrdersManager {
     {
         return size;
     }
+
+    public int getNumberOrdersInDay(LocalDate date)
+    {
+        int number=0;
+        QueueNode t = head;
+        while (t!= null)
+        {
+            if(t.value.getTime().toLocalDate().equals(date))
+                number++;
+            t=t.next;
+        }
+
+        return number;
+    }
+    public ArrayList getOrdersInDay(LocalDate date)
+    {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        QueueNode t = head;
+        while (t!= null) {
+            if (t.value.getTime().toLocalDate().equals(date))
+                orders.add(t.value);
+            t = t.next;
+        }
+        return orders;
+
+    }
+    public ArrayList getOrdersCustomer(Customer customer)
+    {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        QueueNode t = head;
+        while (t!= null) {
+            if (t.value.getCustomer().equals(customer))
+                orders.add(t.value);
+        }
+        return orders;
+    }
+
 
 }
