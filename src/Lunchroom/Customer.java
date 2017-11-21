@@ -17,7 +17,7 @@ public final class Customer {
         address = Address.add;
         firstName = "";
         secondName="";
-        birthDate = LocalDate.of(0000,00,00);
+        birthDate = LocalDate.of(1970,01,01);
     }
 
     Customer(LocalDate age)
@@ -56,11 +56,14 @@ public final class Customer {
     @Override
     public String toString()
     {
-        return "Customer: " +
-                ((!secondName.isEmpty()) ? "<" + secondName + "> ": " ")
-                +  ((!firstName.isEmpty()) ? "<" + firstName + ">, ": " , ")
-                +  ((birthDate!= LocalDate.of(0000,00,00))? "<" + birthDate.toString() + "> ": " , ")
-                + address.toString();
+        StringBuilder result = new StringBuilder();
+        result.append("Customer: ");
+        result.append((!secondName.isEmpty()) ? "<" + secondName + "> ": " ");
+        result.append((!firstName.isEmpty()) ? "<" + firstName + ">, ": " , ");
+        result.append((birthDate!= LocalDate.of(1970,01,01))? "<" + birthDate.toString() + "> ": " , ");
+        result.append(address.toString());
+
+        return result.toString();
     }
 
     @Override
@@ -71,10 +74,11 @@ public final class Customer {
         }
         if (obj == null || !(obj instanceof Customer))return false;
         Customer tmp = (Customer) obj;
-        if (!firstName.equals(tmp.getFirstName())) return false;
-        if (!secondName.equals(getSecondName()))return false;
-        if (getAge()!= tmp.getAge())return false;
-        if (address.equals(((Address)tmp.getAddress())))return false;
+        if (!firstName.equals(tmp.firstName)) return false;
+        if (!secondName.equals(tmp.secondName))return false;
+       // if (getAge()!= tmp.)return false;
+        if (!birthDate.equals(tmp.birthDate)) return false;
+        if (!address.equals(tmp.address))return false;
         return true;
     }
 

@@ -34,8 +34,8 @@ abstract class MenuItem {
 
     public String toString()
     {
-        return ((!name.isEmpty()) ? "<" + name + "> ": ",")
-                +  ((cost>0)? "<" + cost + "> ": " , ") + " р.";
+        return String.format("<%-8s>, <%-5.2f> р.",((!name.isEmpty()) ? name : " , ")
+               ,((cost>0)? cost : "") + " р.");
     }
 
     @Override

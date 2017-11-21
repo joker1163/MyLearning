@@ -67,13 +67,13 @@ public final class Address {
     @Override
     public String toString()
     {
-        return String.format("Address: %-4s ",
-                ((!cityName.isEmpty()) ? "<" + cityName + "> ": " ")
-                ,((zipCode!=-1) ? "<" + zipCode + ">, ": " , ")
-                ,(!(streetName.isEmpty()) ? "<" + streetName + "> ": " ")
-                ,((buildingNumber!= -1)? "<" + buildingNumber+ "> ": " ")
-                ,((buildingLetter!= ' ')? "<" + buildingLetter + "> ": " ")
-                ,((apartmentNumber!= -1)? "<" + apartmentNumber + "> ": " "));
+        return String.format("Address:  <%-8s> <%-6s>, <%-12s> <%-3d> <%-1c> <%-3d>",
+                ((!cityName.isEmpty()) ? cityName : " ")
+                ,((zipCode!=-1) ? zipCode : "")
+                ,(!(streetName.isEmpty()) ? streetName: " ")
+                ,((buildingNumber!= -1)? buildingNumber :"")
+                ,((buildingLetter!= ' ')? buildingLetter : ' ')
+                ,((apartmentNumber!= -1)?  apartmentNumber: ""));
     }
 
     @Override
@@ -84,12 +84,12 @@ public final class Address {
         }
         if (obj == null || !(obj instanceof Address))return false;
          Address tmp = (Address) obj;
-        if (!cityName.equals(tmp.getCityName())) return false;
-        if (apartmentNumber!= tmp.getApartmentNumber())return false;
-        if (zipCode!= tmp.getZipCode())return false;
-        if (buildingNumber!= tmp.getBuildingNumber())return false;
-        if (!streetName.equals(tmp.getStreetName())) return false;
-        if (buildingLetter!= tmp.getBuildingLetter())return false;
+        if (!cityName.equals(tmp.cityName)) return false;
+        if (apartmentNumber!= tmp.apartmentNumber)return false;
+        if (zipCode!= tmp.zipCode)return false;
+        if (buildingNumber!= tmp.buildingNumber)return false;
+        if (!streetName.equals(tmp.streetName)) return false;
+        if (buildingLetter!= tmp.buildingLetter)return false;
         return true;
     }
 

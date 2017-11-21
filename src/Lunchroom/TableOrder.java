@@ -284,6 +284,7 @@ public class TableOrder implements Order{
         if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
            //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
+        if (!timeOrder.equals(t.timeOrder)) return false;
         MenuItem[] item = getItems();
         MenuItem[] itemsObj = t.getItems(); // делаем клон объекта
         for (int i=0;i<item.length; i++) {

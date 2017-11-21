@@ -22,9 +22,12 @@ public class  Test {
 
         //// инициализация покупателей
         Customer cust1 = new Customer("Илья", "Слепушов", LocalDate.of(1992,5,8),
-                new Address("Самара", 443124, "5-я просека", 110, 'д', 199));
+                new Address("Самара", -1, "5-я просека", 110, 'д', 199));
 
         Customer cust2 = new Customer("Екатерина", "Слепушова", LocalDate.of(1993,5,11),
+                new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
+
+        Customer cust2_ = new Customer("Екатерина", "Слепушова", LocalDate.of(1993,5,11),
                 new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
 
         //// иниз заказов
@@ -32,19 +35,33 @@ public class  Test {
 
         Order oneOrder_ = new InternetOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta, juice, borch,omlette});
 
-        Order twoOrder = new InternetOrder(cust2, new MenuItem[] {juice, borch,pasta,omlette,juice});
+        Order twoOrder = new TableOrder(cust2, new MenuItem[] {juice, borch,pasta,omlette,juice});
 
         OrdersManager OM;
         TableOrdersManager tom1 = new TableOrdersManager(5);
         InternetOrdersManager iom1= new InternetOrdersManager();
         tom1.add(oneOrder,1);
-       // tom1.add(oneOrder_,1);
+        tom1.add(twoOrder,2);
+
+        System.out.println(cust2.equals(cust2_));
+
+        // tom1.add(oneOrder_,1);
      //   iom1.add(oneOrder_);
       //  iom1.add(twoOrder);
-        OM = tom1;
+      /*  OM = tom1;
+
+        for (Order i:   OM.getOrders())
+            if (i!=null) {
+                System.out.println(i.getCustomer().toString());
+              //  System.out.println(i.toString());
+
+
+            }
+
+
 //        OM = iom1;
 //        iom1.remove();
-        System.out.println(OM.getOrders()[1].getTime());
+      //  System.out.println(cust2.getAddress().toString());
        /* Alcoholable a;
         tom1.add(oneOrder,3);
         tom1.addItem(potato, 3);

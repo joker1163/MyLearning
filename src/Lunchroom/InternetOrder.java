@@ -408,6 +408,8 @@ public class InternetOrder implements Order {
         InternetOrder t = (InternetOrder)obj;
         if (!customer.equals(t.getCustomer()))return false;
         if (size != t.size)return false;  // ТУТ БЫЛО .itemsQuantity() ВМЕСТО SIZE
+        if (!timeOrder.equals(t.timeOrder)) return false;
+
         //  MenuItem[] obj1 = getItems();
         //MenuItem[] obj2 = t.getItems();
         MenuItem[] item = getItems();
