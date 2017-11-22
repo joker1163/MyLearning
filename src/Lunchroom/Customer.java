@@ -22,6 +22,8 @@ public final class Customer {
 
     Customer(LocalDate age)
     {
+        if (age.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException("Посетитель не мог родится в будущем");
         address = Address.add;
         firstName = "";
         secondName="";
@@ -30,6 +32,8 @@ public final class Customer {
 
     Customer(String firstName, String secondName,LocalDate age, Address address)
     {
+        if (age.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException("Посетитель " + firstName + " не мог родится в будущем");
         this.address = address;
         this.firstName = firstName;
         this.secondName=secondName;
@@ -37,7 +41,7 @@ public final class Customer {
     }
 
     public int getAge() {
-        return this.birthDate.getYear()- LocalDate.now().getYear();
+        return LocalDate.now().getYear() - this.birthDate.getYear();
     }
 
     public Address getAddress() {

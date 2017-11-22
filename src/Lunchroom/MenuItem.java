@@ -13,6 +13,7 @@ abstract class MenuItem {
     }
     protected MenuItem(String name, double cost, String description)
     {
+        if (cost < 0 )  throw new IllegalArgumentException("Мы сами оплачиваем еду?");
         this.name=name;
         this.description=description;
         this.cost=cost;

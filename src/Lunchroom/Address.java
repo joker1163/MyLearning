@@ -22,6 +22,8 @@ public final class Address {
 
      Address(String streetName, int buildingNumber, char buildingLetter, int apartmentNumber)
      {
+         if (buildingNumber<=0 || apartmentNumber <=0 || !Character.isLetter(buildingLetter))
+             throw new IllegalArgumentException("Номер дома или квартиры не может быть отрицательным значением, литера дома только буква");
          cityName="Самара";
          zipCode=-1;
          this.streetName=streetName;
@@ -32,6 +34,9 @@ public final class Address {
 
     Address(String cityName, int zipCode, String streetName, int buildingNumber, char buildingLetter, int apartmentNumber)
     {
+        if (zipCode <=0 || buildingNumber<=0 || apartmentNumber <=0 || !(Character.isLetter(buildingLetter) || buildingLetter==' '))
+            throw new IllegalArgumentException("Номер дома, квартиры или индекс не может быть отрицательным значением, литера дома только буква");
+
         this.cityName=cityName;
         this.zipCode=zipCode;
         this.streetName=streetName;

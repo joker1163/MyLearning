@@ -1,11 +1,43 @@
 package Lunchroom;
 
+import java.io.EOFException;
 import java.time.LocalDate;
+
+class NegativeSizeException extends NegativeArraySizeException { //NegativeArraySizeException
+
+    String error;
+    public NegativeSizeException(String message) {
+
+        //super(message);
+        this.error = message;
+        //number = num;
+    }
+    @Override
+    public String toString()
+    {
+        return error;
+    }
+}
+
+class UnlawfulActionException extends RuntimeException {
+    String error;
+    public UnlawfulActionException(String message){
+        this.error = message;
+    }
+    @Override
+    public String toString()
+    {
+        return error;
+    }
+}
 
 public class  Test {
     public static void main(String[] args) {
 //
+    try {
         MenuItem mi;
+
+
         //// инициализация напитков
         Drink juice = new Drink(100, "Сок", DrinkTypeEnum.JUICE, "Бакал сока", 0);
         Drink coffe = new Drink(50, "Кофе", DrinkTypeEnum.COFFE, "Кофе черный расторивый", 0);
@@ -20,30 +52,39 @@ public class  Test {
         Dish pasta = new Dish("Макароны по флотски", 70, "Макароны по флотски в соусе");
         Dish potato = new Dish("Картошка по французски", 75, "Картошка по французски с сыром");
 
-        //// инициализация покупателей
-        Customer cust1 = new Customer("Илья", "Слепушов", LocalDate.of(1992,5,8),
-                new Address("Самара", -1, "5-я просека", 110, 'д', 199));
 
-        Customer cust2 = new Customer("Екатерина", "Слепушова", LocalDate.of(1993,5,11),
-                new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
+            //// инициализация покупателей
+            Customer cust1 = new Customer("Илья", "Слепушов", LocalDate.of(1992, 5, 8),
+                    new Address("Самара", 443124, "5-я просека", 110, 'д', 199));
 
-        Customer cust2_ = new Customer("Екатерина", "Слепушова", LocalDate.of(1993,5,11),
-                new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
+            Customer cust2 = new Customer("Екатерина", "Слепушова", LocalDate.of(1993, 5, 11),
+                    new Address("Самара", 443064, "Карбышева", 65, ' ', 152));
 
-        //// иниз заказов
-        Order oneOrder = new TableOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta, juice, borch, beer});
 
-        Order oneOrder_ = new InternetOrder(cust1, new MenuItem[] {omlette, juice, borch,pasta, juice, borch,omlette});
 
-        Order twoOrder = new TableOrder(cust2, new MenuItem[] {juice, borch,pasta,omlette,juice});
+            //// иниз заказов
+            //    Order fail = new TableOrder(cust2_,-2);
+            Order oneOrder = new TableOrder(cust1, new MenuItem[]{omlette, juice, borch, pasta, juice, borch, beer});
 
-        OrdersManager OM;
-        TableOrdersManager tom1 = new TableOrdersManager(5);
-        InternetOrdersManager iom1= new InternetOrdersManager();
-        tom1.add(oneOrder,1);
-        tom1.add(twoOrder,2);
+         // Order oneOrder_ = new InternetOrder(cust1, new MenuItem[]{omlette, juice, borch, pasta, juice, borch, omlette});
 
-        System.out.println(cust2.equals(cust2_));
+            Order twoOrder = new TableOrder(cust2, new MenuItem[]{juice, borch, pasta, omlette, juice});
+
+            OrdersManager OM;
+            TableOrdersManager tom1 = new TableOrdersManager(5);
+            InternetOrdersManager iom1 = new InternetOrdersManager();
+            tom1.add(oneOrder, 1);
+            tom1.add(twoOrder, 2);
+            tom1.addItem(beer,2);
+
+            //System.out.println(cust2.equals(cust2_));
+
+        }
+        catch (IllegalArgumentException | NegativeSizeException | UnlawfulActionException e)
+        {
+            System.out.println(e.toString());
+          //  throw e;
+        }
 
         // tom1.add(oneOrder_,1);
      //   iom1.add(oneOrder_);

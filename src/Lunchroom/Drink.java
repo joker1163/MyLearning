@@ -12,6 +12,7 @@ public final class Drink extends MenuItem implements Alcoholable {
     }
     Drink(double cost, String name, DrinkTypeEnum type, String description)
     {
+
         super(name,cost,description);
         this.type = type;
         this.alcoholVol = 0;
@@ -20,6 +21,7 @@ public final class Drink extends MenuItem implements Alcoholable {
     Drink(double cost, String name, DrinkTypeEnum type, String description,  double alcoholVol)
     {
         super(name,cost,description);
+        if (alcoholVol < 0 || alcoholVol > 100 )  throw new IllegalArgumentException("Вы где такие градусы у " + name +" видали?");
         this.type = type;
         this.alcoholVol = alcoholVol;
     }

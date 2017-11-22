@@ -2,7 +2,7 @@ package Lunchroom;
 
 import java.awt.*;
 import java.time.LocalDateTime;
-
+import java.time.LocalTime;
 
 
 public class TableOrder implements Order{
@@ -15,7 +15,8 @@ public class TableOrder implements Order{
         items = new MenuItem[16];
         this.timeOrder = LocalDateTime.now();
     }
-    TableOrder(Customer customer, int n){
+    TableOrder(Customer customer, int n) {
+        if (n<0) throw new NegativeSizeException("Размер заказа не может быть отрицательным числом");
         items = new MenuItem[n];
         this.customer=customer;
         this.timeOrder = LocalDateTime.now();
@@ -34,6 +35,12 @@ public class TableOrder implements Order{
     public boolean add(MenuItem item)
     {
 
+        if (item instanceof Drink)
+        {
+            if (((Drink) item).isAlcoholicDrink() & ( getCustomer().getAge() < 18
+                    || LocalDateTime.now().toLocalTime().isAfter(Alcoholable.TIME_ALCOHOL)))
+                throw new UnlawfulActionException("Нарушены условия продажи алкогольного напитка - " + item.getName());
+        }
         if ( size >= items.length) {
             MenuItem[] t = new MenuItem[size*2];
             for (int i=0; i < size; i++)

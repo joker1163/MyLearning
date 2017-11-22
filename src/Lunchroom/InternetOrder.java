@@ -62,6 +62,12 @@ public class InternetOrder implements Order {
 
     public boolean add(MenuItem item)
     {
+        if (item instanceof Drink)
+        {
+            if (((Drink) item).isAlcoholicDrink() & ( getCustomer().getAge() < 18
+                    || LocalDateTime.now().toLocalTime().isAfter(Alcoholable.TIME_ALCOHOL)))
+                throw new UnlawfulActionException("Нарушены условия продажи алкогольного напитка - " + item.getName());
+        }
         if(head==null)
         {
             head = new ListNode(item,null);

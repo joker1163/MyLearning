@@ -6,12 +6,13 @@ public class TableOrdersManager implements OrdersManager{
     private Order[] orders;
 
     TableOrdersManager(int n){
+        if (n<0) throw new NegativeSizeException("Размер заказа не может быть отрицательным числом");
         orders=new Order[n+1];
     }
 
     public void add(Order order, int tableNumber)
     {
-        if (tableNumber > orders.length|| tableNumber < 0) { System.out.println("Нет такого стола"); return;}
+          if (tableNumber > orders.length|| tableNumber < 0) { System.out.println("Нет такого стола"); return;}
         if (orders[tableNumber]==null)  orders[tableNumber] = order;
         else System.out.println("Столик " +tableNumber +" занят");
     }
@@ -23,6 +24,7 @@ public class TableOrdersManager implements OrdersManager{
 
     public void addItem(MenuItem item, int tableNumber)
     {
+        if (orders[tableNumber]== null)  orders[tableNumber] = new TableOrder();
         orders[tableNumber].add(item);
     }
 
